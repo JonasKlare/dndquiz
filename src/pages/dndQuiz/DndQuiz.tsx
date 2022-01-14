@@ -5,6 +5,7 @@ import * as dataService from '../../dataService';
 import { BubbleQuestion } from '../../components/bubbleQuestion/BubbleQuestion';
 
 import styles from './DndQuiz.module.css';
+import { AnswerModal } from '../../components/answerModal/AnswerModal';
 
 
 
@@ -14,15 +15,41 @@ export interface IDndQuizProps {
 
 
 export const DndQuiz: React.FC<IDndQuizProps> = props => {
-    const data = dataService.convertCsvToData()
-
+    const [isAnswerVisible, setIsAnswerVisible] = React.useState(false);
+    const [data, setData] = React.useState(_.map(dataService.convertCsvToData(), row => {
+        return {
+            ...row,
+            value: 3
+        }
+    }))
+    
     return (
         <div className={styles.root}>
-            {_.map(data, row => (
+            <AnswerModal
+                visible={isAnswerVisible} />
+
+            {_.map(data, (row, index) => (
                 <BubbleQuestion
-                onClick={() => _.noop()}
+                onClick={(id) => {
+                    const tempArr = data;
+
+                    tempArr[index] = {
+                        ...row,
+                        value: id
+                    }
+
+                    setData(tempArr)
+                }}
                 question={row.question || ""} />
             ))}
+
+            <div
+                onClick={() => {
+                    setIsAnswerVisible(!isAnswerVisible)
+                }} 
+                className={styles.submitButton}>
+                Submit
+            </div>
         </div>
     )
 }

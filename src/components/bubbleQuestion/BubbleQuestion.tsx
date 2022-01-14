@@ -18,10 +18,14 @@ export const BubbleQuestion: React.FC<IBubbleQuestionProps> = props => {
             return false;
     }))
 
+
+
     const handleClickCircle = (circleId: number) => {
+        let selectedId = 0;
         const newSelected = _.map(selected, (s, id) => {
 
             if(id == circleId) {
+                selectedId = id;
                 return true
             }
 
@@ -29,8 +33,11 @@ export const BubbleQuestion: React.FC<IBubbleQuestionProps> = props => {
         });
 
         setSelected(newSelected);
+        props.onClick(selectedId);
     }
 
+
+    
     return (
         <div className={styles.root}>
 
