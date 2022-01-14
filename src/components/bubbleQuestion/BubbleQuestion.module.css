@@ -1,0 +1,110 @@
+.root {
+    margin-bottom: 40px;
+}
+
+    .question {
+        margin-bottom: 27px;
+    }
+
+    .selector {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .largeContainer {
+        height: 50px;
+        width: 50px;
+    }
+
+    .medContainer {
+        height: 45px;
+        width: 45px;
+    }
+
+    .smallContainer {
+        height: 40px;
+        width: 40px;
+    }
+
+    .tinyContainer {
+        height: 35px;
+        width: 35px;
+    }
+
+    .leftCircle {
+        background-color: #fff;
+        box-shadow: 0px 0px 0px 4px #33a474 inset;
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+    }
+
+        .leftCircle:hover {
+            background-color: #33a474;
+        }
+
+    .neutralCircle {
+        box-shadow: 0px 0px 0px 4px gray inset;
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+    }
+ 
+        .neutralCircle:hover {
+            background-color: gray;
+        }
+
+    .rightCircle {
+        box-shadow: 0px 0px 0px 4px #88619a inset;
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+    }
+
+        .rightCircle:hover {
+            background-color: #88619a;
+        }
+
+    .leftCircleSelected {
+        background-color: #33a474;
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .neutralCircleSelected {
+        background-color: gray;
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .rightCircleSelected {
+        background-color: #88619a;
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .agree {
+        font-size: 1.2rem;
+        color: #33a474
+    }
+
+    .disagree {
+        font-size: 1.2rem;
+        color: #88619a
+    }
+        
+
+
+        
