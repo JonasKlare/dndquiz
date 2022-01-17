@@ -3,9 +3,9 @@ import * as React from 'react';
 import * as dataService from '../../dataService';
 
 import { BubbleQuestion } from '../../components/bubbleQuestion/BubbleQuestion';
+import { AnswerModal } from '../../components/answerModal/AnswerModal';
 
 import styles from './DndQuiz.module.css';
-import { AnswerModal } from '../../components/answerModal/AnswerModal';
 
 
 
@@ -26,6 +26,7 @@ export const DndQuiz: React.FC<IDndQuizProps> = props => {
     return (
         <div className={styles.root}>
             <AnswerModal
+                onClose={() => {setIsAnswerVisible(!isAnswerVisible)}}
                 visible={isAnswerVisible} />
 
             {_.map(data, (row, index) => (
