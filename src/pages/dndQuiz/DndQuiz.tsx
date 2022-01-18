@@ -19,34 +19,46 @@ export const DndQuiz: React.FC<IDndQuizProps> = props => {
     const [data, setData] = React.useState(_.map(dataService.convertCsvToData(), row => {
         return {
             ...row,
-            value: 3
+            value: -1
         }
     }))
     
     return (
         <div className={styles.root}>
             <AnswerModal
-                onClose={() => {setIsAnswerVisible(!isAnswerVisible)}}
+                onClose={() => {
+                    setIsAnswerVisible(!isAnswerVisible);
+                }}
                 visible={isAnswerVisible} />
 
             {_.map(data, (row, index) => (
                 <BubbleQuestion
-                onClick={(id) => {
-                    const tempArr = data;
+                    onClick={(id) => {
+                        const tempArr = data;
 
-                    tempArr[index] = {
-                        ...row,
-                        value: id
-                    }
+                        tempArr[index] = {
+                            ...row,
+                            value: id
+                        };
 
-                    setData(tempArr)
-                }}
-                question={row.question || ""} />
+                        setData(tempArr);
+                    }}
+                    question={row.question || ""} />
             ))}
 
             <div
                 onClick={() => {
-                    setIsAnswerVisible(!isAnswerVisible)
+                    let hasUnfilledValue = true;
+                    _.map(data, row => {
+                        if(row.value === -1) {
+                            hasUnfilledValue = false;
+                        }
+                    });
+
+                    if(hasUnfilledValue) {
+                        console.log(data)
+                        setIsAnswerVisible(!isAnswerVisible)
+                    }
                 }} 
                 className={styles.submitButton}>
                 Submit

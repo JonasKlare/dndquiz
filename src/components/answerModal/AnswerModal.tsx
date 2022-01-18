@@ -35,7 +35,9 @@ export const AnswerModal: React.FC<IAnswerModalProps> = props => {
                 onClick={props.onClose} /> 
             
             <div className={styles.modal}>
-                HELLO!
+                <div className={styles.results}>
+                    These are where results will be!
+                </div>
             </div>
         </div>
     )
