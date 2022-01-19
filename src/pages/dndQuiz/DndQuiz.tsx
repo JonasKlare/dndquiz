@@ -19,6 +19,7 @@ export interface IDndQuizProps {
 
 
 export const DndQuiz: React.FC<IDndQuizProps> = props => {
+    //TODO(jonask): change the website link once we have a website!
     const websiteLink = "https://www.jonasklare.com";
     const [isAnswerVisible, setIsAnswerVisible] = React.useState(false);
     const [data, setData] = React.useState(_.map(dataService.convertCsvToData(), row => {
@@ -109,11 +110,19 @@ export interface IStatBlock {
     int: number,
     wis: number,
     cha: number
+};
+
+
+interface ISelectedQuestionData {
+    selected: number;
+    value: number;
+    question: string;
+    attribute: string;
 }
 
 
 
-const calculateResults = (data: { selected: number; question: string; attribute: string; value: number; }[]) => {
+const calculateResults = (data: ISelectedQuestionData[]) => {
     const statBlock: IStatBlock = {
         "str": 10,
         "dex": 10,
