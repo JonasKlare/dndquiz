@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import * as React from 'react';
+import { IStatBlock } from '../../pages/dndQuiz/DndQuiz';
 
 import styles from './AnswerModal.module.css';
 
 export interface IAnswerModalProps {
     visible: boolean;
+    result: IStatBlock;
 
     onClose: () => void;
 };
@@ -24,7 +26,7 @@ export const AnswerModal: React.FC<IAnswerModalProps> = props => {
 
         document.addEventListener('wheel', handleWheel, {passive: false});
         return () => document.removeEventListener('wheel', handleWheel);
-    }, [props])
+    }, [props]);
 
     return (
         <div
@@ -36,9 +38,19 @@ export const AnswerModal: React.FC<IAnswerModalProps> = props => {
             
             <div className={styles.modal}>
                 <div className={styles.results}>
-                    These are where results will be!
+                    Strength: {props.result.str}
+                    <br/>
+                    Dexterity: {props.result.dex}
+                    <br/>
+                    Constitution: {props.result.con}
+                    <br/>
+                    Intelligence: {props.result.int}
+                    <br/>
+                    Wisdom: {props.result.wis}
+                    <br/>
+                    Charisma: {props.result.cha}
                 </div>
             </div>
         </div>
-    )
+    );
 }

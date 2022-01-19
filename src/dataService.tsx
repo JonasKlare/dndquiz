@@ -20,7 +20,7 @@ export const convertCsvToData = () => {
         return ({
             question: delimitedInfo[0],
             attribute: delimitedInfo[1],
-            value: delimitedInfo[2]
+            value: +delimitedInfo[2]
         });
     });
 
