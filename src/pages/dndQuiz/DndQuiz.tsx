@@ -1,6 +1,10 @@
 import _ from 'lodash';
 import * as React from 'react';
 import * as dataService from '../../dataService';
+import { FacebookIcon, FacebookShareButton,
+    RedditIcon, RedditShareButton,
+    TwitterIcon, TwitterShareButton 
+} from 'react-share';
 
 import { BubbleQuestion } from '../../components/bubbleQuestion/BubbleQuestion';
 import { AnswerModal } from '../../components/answerModal/AnswerModal';
@@ -15,15 +19,19 @@ export interface IDndQuizProps {
 
 
 export const DndQuiz: React.FC<IDndQuizProps> = props => {
+    //TODO(jonask): change the website link once we have a website!
+    const websiteLink = "https://www.jonasklare.com";
     const [isAnswerVisible, setIsAnswerVisible] = React.useState(false);
     const [data, setData] = React.useState(_.map(dataService.convertCsvToData(), row => {
         return {
             ...row,
             selected: -1
         }
-    }))
+    }));
     const [result, setResult] = React.useState(calculateResults(data));
     
+
+
     return (
         <div className={styles.root}>
             <AnswerModal
@@ -49,27 +57,51 @@ export const DndQuiz: React.FC<IDndQuizProps> = props => {
             ))}
 
             <div
+                className={styles.submitButton}
                 onClick={() => {
                     let hasUnfilledSelection = true;
                     _.map(data, row => {
-                        if((row.selected-3) === -1) {
+                        if ((row.selected-3) === -1) {
                             hasUnfilledSelection = false;
                         }
                     });
 
-
-                    if(hasUnfilledSelection) {
-                        console.log(data)
+                    if (hasUnfilledSelection) {
                         setResult(calculateResults(data))
                         setIsAnswerVisible(!isAnswerVisible)
                     }
-                }} 
-                className={styles.submitButton}>
-                Submit
+                }}>
+                <div className={styles.submitButtonText}>
+                    Get Results
+                </div>
+            </div>
+            
+            <div className={styles.lineBreak}/>
+
+            <div className={styles.shareContainer}>
+                <div className={styles.shareButtonContainer}>
+                    <FacebookShareButton url={websiteLink}>
+                        <FacebookIcon size={32} round={true} />
+                    </FacebookShareButton>
+                </div>
+
+                <div className={styles.shareButtonContainer}>
+                    <TwitterShareButton url={websiteLink}>
+                        <TwitterIcon size={32} round={true} />
+                    </TwitterShareButton>
+                </div>
+                
+                <div className={styles.shareButtonContainer}>
+                    <RedditShareButton url={websiteLink}>
+                        <RedditIcon size={32} round={true} />
+                    </RedditShareButton>
+                </div>
             </div>
         </div>
     )
 }
+
+
 
 export interface IStatBlock {
     str: number,
@@ -78,9 +110,20 @@ export interface IStatBlock {
     int: number,
     wis: number,
     cha: number
+};
+
+
+
+interface ISelectedQuestionData {
+    selected: number;
+    value: number;
+    question: string;
+    attribute: string;
 }
 
-const calculateResults = (data: { selected: number; question: string; attribute: string; value: number; }[]) => {
+
+
+const calculateResults = (data: ISelectedQuestionData[]) => {
     const statBlock: IStatBlock = {
         "str": 10,
         "dex": 10,
