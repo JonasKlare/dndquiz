@@ -1,9 +1,42 @@
 .root {
-    
+    display: flex;
+    flex-direction: column;
 }
+    
+    .lineBreak {
+        border: 1px solid gray;
+        margin-right: 4vw;
+        margin-left: 4vw;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .shareContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .shareButtonContainer {
+            margin: 0px 11px;
+        }
 
     .submitButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         padding: 10px;
-        color: gray;
-        border: 1px solid green;
+        height: 35px;
+        width: 113px;
+        align-self: center;
+        border-radius: 4px;
+        border: 1px solid lightskyblue;
+        background-color: lightskyblue;
+        cursor: pointer;
     }
+
+        .submitButtonText {
+            color: black;
+        }
