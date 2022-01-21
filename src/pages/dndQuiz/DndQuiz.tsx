@@ -43,7 +43,6 @@ export const DndQuiz: React.FC<IDndQuizProps> = props => {
 
             {_.map(data, (row, index) => (
                 <BubbleQuestion
-                    key={index}
                     onClick={(id) => {
                         const tempArr = data;
 
@@ -62,8 +61,7 @@ export const DndQuiz: React.FC<IDndQuizProps> = props => {
                 onClick={() => {
                     let hasUnfilledSelection = true;
                     _.map(data, row => {
-                        console.log(row.selected)
-                        if (row.selected === -1) {
+                        if ((row.selected-3) === -1) {
                             hasUnfilledSelection = false;
                         }
                     });
@@ -145,9 +143,8 @@ const calculateResults = (data: ISelectedQuestionData[]) => {
         "cha": 0
     }
 
-
-    //Could use this switch statement to store which sections aren't finished in the form
-    //  Whenever there is a 0 value, add to a 'missing val' block
+    //Could use this switch statement to store which sections aren't finished in the form Whenever there is a 0 value, 
+    //  add to a 'missing val' block
     _.map(data, row => {
         switch(row.attribute) {
             case "str":
@@ -178,9 +175,8 @@ const calculateResults = (data: ISelectedQuestionData[]) => {
         }
     });
 
-
-    //Normalize the values to be on a 3-18 scale. 
-    //  To do this there are 15 unique values, so we divide by max nums then add 3.
+    //Normalize the values to be on a 3-18 scale. To do this there are 15 unique values, so we divide by max nums then 
+    //  add 3. It checks if there are questions of that kind and then add them up.
     const newStatBlock = {
         "str": maxStatBlock.str !== 0 ? Math.floor(statBlock.str/maxStatBlock.str*15) + 3 : 10, 
         "dex": maxStatBlock.dex !== 0 ? Math.floor(statBlock.dex/maxStatBlock.dex*15) + 3 : 10,
