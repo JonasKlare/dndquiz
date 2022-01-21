@@ -125,39 +125,66 @@ interface ISelectedQuestionData {
 
 const calculateResults = (data: ISelectedQuestionData[]) => {
     const statBlock: IStatBlock = {
-        "str": 10,
-        "dex": 10,
-        "con": 10,
-        "int": 10,
-        "wis": 10,
-        "cha": 10
+        "str": 0,
+        "dex": 0,
+        "con": 0,
+        "int": 0,
+        "wis": 0,
+        "cha": 0
     };
+    
+    const maxSelectedValue = 6;
+    const maxStatBlock: IStatBlock = {
+        "str": 0,
+        "dex": 0,
+        "con": 0,
+        "int": 0,
+        "wis": 0,
+        "cha": 0
+    }
 
-    //Could use this switch statement to store which sections aren't finished in the form
-    //  Whenever there is a 0 value, add to a 'missing val' block
+    //Could use this switch statement to store which sections aren't finished in the form Whenever there is a 0 value, 
+    //  add to a 'missing val' block
     _.map(data, row => {
         switch(row.attribute) {
             case "str":
                 console.log(row)
-                statBlock.str += (row.selected-3) * row.value;
+                statBlock.str += row.selected * row.value;
+                maxStatBlock.str += maxSelectedValue * row.value
                 break;
             case "dex":
-                statBlock.dex += (row.selected-3) * row.value;
+                statBlock.dex += row.selected * row.value;
+                maxStatBlock.dex += maxSelectedValue * row.value
                 break;
             case "con": 
-                statBlock.con += (row.selected-3) * row.value;
+                statBlock.con += row.selected * row.value;
+                maxStatBlock.con += maxSelectedValue * row.value
                 break;
             case "int":
-                statBlock.int += (row.selected-3) * row.value;
+                statBlock.int += row.selected * row.value;
+                maxStatBlock.wis += maxSelectedValue * row.value
                 break;
             case "wis":
-                statBlock.wis += (row.selected-3) * row.value;
+                statBlock.wis += row.selected * row.value;
+                maxStatBlock.int += maxSelectedValue * row.value
                 break;
             case "cha":
-                statBlock.cha += (row.selected-3) * row.value;
+                statBlock.cha += row.selected * row.value;
+                maxStatBlock.cha += maxSelectedValue * row.value
                 break;
         }
     });
 
-    return statBlock;
+    //Normalize the values to be on a 3-18 scale. To do this there are 15 unique values, so we divide by max nums then 
+    //  add 3. It checks if there are questions of that kind and then add them up.
+    const newStatBlock = {
+        "str": maxStatBlock.str !== 0 ? Math.floor(statBlock.str/maxStatBlock.str*15) + 3 : 10, 
+        "dex": maxStatBlock.dex !== 0 ? Math.floor(statBlock.dex/maxStatBlock.dex*15) + 3 : 10,
+        "con": maxStatBlock.con !== 0 ? Math.floor(statBlock.con/maxStatBlock.con*15) + 3 : 10,
+        "int": maxStatBlock.int !== 0 ? Math.floor(statBlock.int/maxStatBlock.int*15) + 3 : 10,
+        "wis": maxStatBlock.wis !== 0 ? Math.floor(statBlock.wis/maxStatBlock.wis*15) + 3 : 10,
+        "cha": maxStatBlock.cha !== 0 ? Math.floor(statBlock.cha/maxStatBlock.cha*15) + 3 : 10
+    };
+    
+    return newStatBlock;
 }
