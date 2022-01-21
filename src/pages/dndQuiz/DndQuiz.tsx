@@ -43,6 +43,7 @@ export const DndQuiz: React.FC<IDndQuizProps> = props => {
 
             {_.map(data, (row, index) => (
                 <BubbleQuestion
+                    key={index}
                     onClick={(id) => {
                         const tempArr = data;
 
@@ -61,7 +62,7 @@ export const DndQuiz: React.FC<IDndQuizProps> = props => {
                 onClick={() => {
                     let hasUnfilledSelection = true;
                     _.map(data, row => {
-                        if ((row.selected-3) === -1) {
+                        if (row.selected === -1) {
                             hasUnfilledSelection = false;
                         }
                     });
