@@ -36,7 +36,7 @@
 
     .leftCircle {
         background-color: #fff;
-        box-shadow: 0px 0px 0px 4px #33a474 inset;
+        box-shadow: 0px 0px 0px 4px #88619a inset;
         border-radius: 50%;
         height: 100%;
         width: 100%;
@@ -44,7 +44,7 @@
     }
 
         .leftCircle:hover {
-            background-color: #33a474;
+            background-color: #88619a;
         }
 
     .neutralCircle {
@@ -60,7 +60,7 @@
         }
 
     .rightCircle {
-        box-shadow: 0px 0px 0px 4px #88619a inset;
+        box-shadow: 0px 0px 0px 4px #33a474 inset;
         border-radius: 50%;
         height: 100%;
         width: 100%;
@@ -68,7 +68,7 @@
     }
 
         .rightCircle:hover {
-            background-color: #88619a;
+            background-color: #33a474;            
         }
 
     .leftCircleSelected {

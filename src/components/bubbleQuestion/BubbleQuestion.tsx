@@ -46,8 +46,8 @@ export const BubbleQuestion: React.FC<IBubbleQuestionProps> = props => {
             </div>
     
             <div className={styles.selector}>
-                <div className={styles.agree}> 
-                    Agree
+                <div className={styles.disagree}> 
+                    Disagree
                 </div>
 
                 <div onClick={() => handleClickCircle(0)} className={styles.largeContainer}>
@@ -85,8 +85,8 @@ export const BubbleQuestion: React.FC<IBubbleQuestionProps> = props => {
                     {!selected[6] && <div className={styles.rightCircle} />}
                 </div>
 
-                <div className={styles.disagree}>
-                    Disagree
+                <div className={styles.agree}>
+                    Agree
                 </div>
             </div>
         </div>
