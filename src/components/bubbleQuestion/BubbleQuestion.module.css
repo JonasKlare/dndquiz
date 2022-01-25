@@ -72,7 +72,7 @@
         }
 
     .leftCircleSelected {
-        background-color: #33a474;
+        background-color: #88619a;
         border-radius: 50%;
         height: 100%;
         width: 100%;
@@ -88,7 +88,7 @@
     }
 
     .rightCircleSelected {
-        background-color: #88619a;
+        background-color: #33a474;
         border-radius: 50%;
         height: 100%;
         width: 100%;
