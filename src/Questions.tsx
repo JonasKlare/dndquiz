@@ -8,6 +8,7 @@ I'm sicker than all my friends,cha,1,
 NEw QUESTIONS??s,dex,1`
 
 
+
 /**
  * STR: Looking at strength levels
  *      Strength comparison to friends
@@ -33,8 +34,6 @@ NEw QUESTIONS??s,dex,1`
  *      people often comment on your personality
  *      you recieve compliments on your appearance
  *      
- * 
- * 
  * Solitude (int) vs Groups (cha)
  * Follow heart vs brain
  * easier to continue walking or continue working
