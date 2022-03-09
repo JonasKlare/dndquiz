@@ -1,5 +1,4 @@
 export const Questions: string =
-<<<<<<< HEAD
 `I'm stronger than all of my friends,str,1
 I'll perform feats of athleticism,str,1,
 I exercise consistently,str,1,
@@ -56,12 +55,3 @@ People often compliment my appearance,cha,1`
  * Follow heart vs brain
  * easier to continue walking or continue working
  */
-=======
-`I can do a lot of push ups,str,1
-I can climb ropes easily,str,1
-I'm known amongst my friends for performing feats of strength,str,1
-I'm stronger than all of my friends,str,1
-I'm cuter than all my friends,cha,1
-I'm sicker than all my friends,cha,1,
-NEw QUESTIONS??s,dex,1`
->>>>>>> ee1132cef0b89a75dbdbcbcb8b71cdc50a6945af
