@@ -50,6 +50,7 @@ export const DndQuiz: React.FC<IDndQuizProps> = props => {
 
             {_.map(data, (row, index) => (
                 <BubbleQuestion
+                    key={index}
                     onClick={(id) => {
                         const tempArr = data;
 
