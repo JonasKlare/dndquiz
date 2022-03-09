@@ -8,6 +8,7 @@ import { FacebookIcon, FacebookShareButton,
 
 import { BubbleQuestion } from '../../components/bubbleQuestion/BubbleQuestion';
 import { AnswerModal } from '../../components/answerModal/AnswerModal';
+import { NotFilledModal } from '../../components/notFilledModal/NotFilledModal';
 
 import styles from './DndQuiz.module.css';
 
@@ -19,9 +20,9 @@ export interface IDndQuizProps {
 
 
 export const DndQuiz: React.FC<IDndQuizProps> = props => {
-    //TODO(jonask): change the website link once we have a website!
-    const websiteLink = "https://www.jonasklare.com";
+    const websiteLink = "https://jonasklare.github.io/dndquiz/";
     const [isAnswerVisible, setIsAnswerVisible] = React.useState(false);
+    const [isNotFilledVisible, setIsNotFilledVisible] = React.useState(false);
     const [data, setData] = React.useState(_.map(dataService.convertCsvToData(), row => {
         return {
             ...row,
@@ -41,6 +42,12 @@ export const DndQuiz: React.FC<IDndQuizProps> = props => {
                 result={result}
                 visible={isAnswerVisible} />
 
+            <NotFilledModal
+                onClose={() => {
+                    setIsNotFilledVisible(!isNotFilledVisible);
+                }}
+                visible={isNotFilledVisible} />
+
             {_.map(data, (row, index) => (
                 <BubbleQuestion
                     onClick={(id) => {
@@ -59,16 +66,20 @@ export const DndQuiz: React.FC<IDndQuizProps> = props => {
             <div
                 className={styles.submitButton}
                 onClick={() => {
-                    let hasUnfilledSelection = true;
+                    let hasUnfilledSelection = false;
                     _.map(data, row => {
-                        if ((row.selected-3) === -1) {
-                            hasUnfilledSelection = false;
+                        if ((row.selected) === -1) {
+                            hasUnfilledSelection = true;
                         }
                     });
 
-                    if (hasUnfilledSelection) {
+                    if (!hasUnfilledSelection) {
                         setResult(calculateResults(data))
                         setIsAnswerVisible(!isAnswerVisible)
+                    }
+                    else {
+                        console.log("not filled")
+                        setIsNotFilledVisible(!isNotFilledVisible)
                     }
                 }}>
                 <div className={styles.submitButtonText}>
@@ -146,30 +157,32 @@ const calculateResults = (data: ISelectedQuestionData[]) => {
     //Could use this switch statement to store which sections aren't finished in the form Whenever there is a 0 value, 
     //  add to a 'missing val' block
     _.map(data, row => {
+
+        const calculatedValue = 6 - row.selected;
         switch(row.attribute) {
             case "str":
-                console.log(row)
-                statBlock.str += row.selected * row.value;
+                statBlock.str += calculatedValue * row.value;
                 maxStatBlock.str += maxSelectedValue * row.value
                 break;
             case "dex":
-                statBlock.dex += row.selected * row.value;
+                statBlock.dex += calculatedValue * row.value;
                 maxStatBlock.dex += maxSelectedValue * row.value
                 break;
-            case "con": 
-                statBlock.con += row.selected * row.value;
+            case "con":
+                statBlock.con += calculatedValue * row.value;
                 maxStatBlock.con += maxSelectedValue * row.value
                 break;
             case "int":
-                statBlock.int += row.selected * row.value;
+                statBlock.int += calculatedValue * row.value;
                 maxStatBlock.wis += maxSelectedValue * row.value
                 break;
             case "wis":
-                statBlock.wis += row.selected * row.value;
-                maxStatBlock.int += maxSelectedValue * row.value
+                statBlock.wis += calculatedValue * row.value;
+                maxStatBlock.wis += maxSelectedValue * row.value
+                //console.log("wisdom", statBlock.wis)
                 break;
             case "cha":
-                statBlock.cha += row.selected * row.value;
+                statBlock.cha += calculatedValue * row.value;
                 maxStatBlock.cha += maxSelectedValue * row.value
                 break;
         }

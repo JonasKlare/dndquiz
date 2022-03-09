@@ -17,6 +17,9 @@ export const convertCsvToData = () => {
 
     const fullData = _.map(rows, row => {
         const delimitedInfo = _.split(row, ',')
+
+        //Check if the size is of size 9, if it is, interpret that as a scale
+        
         return ({
             question: delimitedInfo[0],
             attribute: delimitedInfo[1],
